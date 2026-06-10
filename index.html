@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>日常小记 | 生活博客</title>
+    <title>日常小记 | 生活记录博客</title>
     <meta
       name="description"
-      content="一个记录生活、旅行、阅读、照片和日常想法的个人博客。"
+      content="一个可以直接记录近期思考、生活照片和阅读摘抄的个人生活博客。"
     />
     <style>
 :root {
@@ -39,9 +39,21 @@ body {
   background: var(--paper);
 }
 
+a,
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 .site-header {
@@ -138,7 +150,7 @@ a {
 
 .hero {
   position: relative;
-  min-height: 88vh;
+  min-height: 82vh;
   display: grid;
   align-items: center;
   padding: 118px clamp(20px, 6vw, 82px) 84px;
@@ -196,15 +208,15 @@ h1 {
 }
 
 h2 {
-  margin-bottom: 22px;
-  font-size: clamp(2.1rem, 4.5vw, 4.4rem);
+  margin-bottom: 18px;
+  font-size: clamp(2.1rem, 4.5vw, 4.2rem);
   line-height: 1.04;
   letter-spacing: 0;
 }
 
 h3 {
-  margin-bottom: 14px;
-  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  margin-bottom: 12px;
+  font-size: clamp(1.18rem, 2vw, 1.58rem);
   line-height: 1.18;
 }
 
@@ -216,7 +228,8 @@ h3 {
   line-height: 1.8;
 }
 
-.hero-actions {
+.hero-actions,
+.form-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -251,172 +264,183 @@ h3 {
   color: #fffdf8;
 }
 
-.mood-strip {
+.button.ghost {
+  color: var(--ink);
+  background: transparent;
+  border-color: var(--line);
+}
+
+.compose-section,
+.section {
+  padding: clamp(72px, 10vw, 126px) clamp(20px, 6vw, 82px);
+}
+
+.compose-section {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--line);
+  grid-template-columns: minmax(0, 0.7fr) minmax(340px, 1fr);
+  gap: clamp(34px, 6vw, 82px);
+  align-items: start;
+  background: #eef0e8;
 }
 
-.mood-strip div {
-  min-height: 118px;
-  display: grid;
-  align-content: center;
-  gap: 8px;
-  padding: 24px clamp(18px, 4vw, 48px);
-  background: var(--paper);
+.compose-copy {
+  position: sticky;
+  top: 104px;
 }
 
-.mood-strip strong {
-  color: var(--moss);
-  font-size: clamp(1.35rem, 2.5vw, 2.2rem);
-}
-
-.mood-strip span,
-.post-card p,
-.photo-grid p,
-.list-item p,
-.about-section p {
+.compose-copy p,
+.section-heading p,
+.entry-card p,
+.empty-state p,
+.image-field small {
   color: var(--muted);
   line-height: 1.78;
 }
 
-.section,
-.about-section {
-  padding: clamp(72px, 10vw, 132px) clamp(20px, 6vw, 82px);
+.entry-form {
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: clamp(20px, 4vw, 34px);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  font-weight: 800;
+}
+
+label span {
+  color: var(--moss);
+  font-size: 0.92rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px 14px;
+  color: var(--ink);
+  background: #fffefa;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 152px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(63, 85, 67, 0.58);
+  box-shadow: 0 0 0 4px rgba(117, 132, 108, 0.16);
+}
+
+.image-field small {
+  font-size: 0.86rem;
 }
 
 .section-heading {
   max-width: 780px;
-  margin-bottom: clamp(30px, 5vw, 54px);
+  margin-bottom: clamp(30px, 5vw, 52px);
 }
 
-.post-grid {
+.board-section {
+  min-height: 520px;
+}
+
+.life-section {
+  background: #f3efe5;
+}
+
+.entry-list {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.7fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
-.post-card {
-  min-height: 278px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.entry-card,
+.empty-state {
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: clamp(22px, 3vw, 34px);
+  padding: clamp(20px, 3vw, 28px);
   background: var(--surface);
   box-shadow: 0 12px 34px rgba(32, 35, 31, 0.06);
 }
 
-.post-card.large {
-  grid-row: span 2;
-  min-height: 574px;
-  background: var(--moss);
-  color: #fffdf8;
+.entry-card {
+  display: grid;
+  gap: 16px;
+  align-content: start;
 }
 
-.post-card.large p {
-  color: rgba(255, 253, 248, 0.76);
+.entry-card header {
+  display: grid;
+  gap: 8px;
 }
 
-.post-card time {
-  margin-bottom: 34px;
+.entry-card time,
+.entry-card .book-meta {
   color: var(--rose);
   font-size: 0.86rem;
   font-weight: 850;
 }
 
-.post-card.large time {
-  color: var(--honey);
-}
-
-.post-card a {
-  width: fit-content;
-  color: var(--rose);
-  font-weight: 850;
-}
-
-.post-card.large a {
-  color: var(--honey);
-}
-
-.album-section {
-  background: #eef0e8;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(63, 85, 67, 0.18);
-}
-
-.photo-grid article {
-  min-height: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 26px;
-  background:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.08), rgba(255, 253, 248, 0.88)),
-    var(--surface);
-}
-
-.photo-grid span {
-  margin-bottom: auto;
-  color: var(--honey);
-  font-weight: 900;
-}
-
-.split {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
-  gap: clamp(36px, 7vw, 92px);
-  align-items: start;
-}
-
-.list-panel {
-  border-top: 1px solid var(--line);
-}
-
-.list-item {
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 22px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.list-item span {
-  color: var(--rose);
-  font-weight: 900;
-}
-
-.list-item p {
+.entry-card p {
   margin-bottom: 0;
+  white-space: pre-wrap;
 }
 
-.about-section {
+.entry-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.entry-card footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-entry {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.delete-entry:hover {
+  color: var(--rose);
+  border-color: rgba(189, 111, 99, 0.42);
+}
+
+.empty-state {
+  min-height: 180px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 32px;
-  align-items: center;
-  color: #fffdf8;
-  background: var(--moss);
-}
-
-.about-section h2 {
-  max-width: 720px;
-}
-
-.about-section p {
-  max-width: 720px;
-  color: rgba(255, 253, 248, 0.78);
+  align-content: center;
+  grid-column: 1 / -1;
+  background: rgba(255, 253, 248, 0.62);
 }
 
 .site-footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 20px;
   padding: 26px clamp(20px, 6vw, 82px);
@@ -424,12 +448,22 @@ h3 {
   background: #1f281f;
 }
 
-.site-footer a {
-  color: #fffdf8;
-  font-weight: 800;
+.site-footer div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-@media (max-width: 920px) {
+.site-footer button {
+  border: 1px solid rgba(255, 253, 248, 0.2);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #fffdf8;
+  background: transparent;
+  font-weight: 780;
+}
+
+@media (max-width: 980px) {
   .site-header {
     padding: 14px 20px;
   }
@@ -464,7 +498,7 @@ h3 {
   }
 
   .hero {
-    min-height: 84vh;
+    min-height: 78vh;
     padding-top: 112px;
   }
 
@@ -477,31 +511,19 @@ h3 {
       linear-gradient(0deg, rgba(45, 54, 39, 0.34), rgba(45, 54, 39, 0.1));
   }
 
-  .mood-strip,
-  .post-grid,
-  .photo-grid,
-  .split,
-  .about-section {
+  .compose-section,
+  .entry-list {
     grid-template-columns: 1fr;
   }
 
-  .post-card.large {
-    min-height: 380px;
-  }
-
-  .photo-grid article {
-    min-height: 190px;
+  .compose-copy {
+    position: static;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 620px) {
   .brand span:last-child {
     display: none;
-  }
-
-  .hero {
-    min-height: 82vh;
-    padding-bottom: 58px;
   }
 
   h1 {
@@ -513,27 +535,22 @@ h3 {
   }
 
   .hero-actions,
+  .field-row,
+  .form-actions,
   .button {
     width: 100%;
+    grid-template-columns: 1fr;
   }
 
-  .mood-strip div {
-    min-height: 96px;
-  }
-
-  .section,
-  .about-section {
+  .compose-section,
+  .section {
     padding-right: 18px;
     padding-left: 18px;
   }
 
-  .list-item {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
   .site-footer {
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -553,10 +570,10 @@ h3 {
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="主导航">
-        <a href="#notes">随记</a>
-        <a href="#albums">相册</a>
-        <a href="#lists">清单</a>
-        <a href="#about">关于</a>
+        <a href="#compose">写入</a>
+        <a href="#thoughts">近期思考</a>
+        <a href="#life">生活记录</a>
+        <a href="#reading">阅读</a>
       </nav>
     </header>
 
@@ -567,123 +584,125 @@ h3 {
           <p class="eyebrow">Life Journal</p>
           <h1>把日子慢慢写下来。</h1>
           <p class="hero-copy">
-            这里会记录一些普通但值得保存的瞬间：散步、吃饭、读书、旅行、照片，以及偶尔突然冒出来的想法。
+            一个给自己用的小博客：写下近期思考，保存生活照片，摘抄读书时遇见的句子。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#notes">读最新随记</a>
-            <a class="button secondary" href="#albums">看生活相册</a>
+            <a class="button primary" href="#compose">开始记录</a>
+            <a class="button secondary" href="#thoughts">查看内容</a>
           </div>
         </div>
       </section>
 
-      <section class="mood-strip" aria-label="博客主题">
-        <div><strong>散步</strong><span>城市角落</span></div>
-        <div><strong>餐桌</strong><span>一日三餐</span></div>
-        <div><strong>阅读</strong><span>书和摘录</span></div>
-        <div><strong>旅行</strong><span>短途和远方</span></div>
-      </section>
-
-      <section class="section" id="notes">
-        <div class="section-heading">
-          <p class="section-kicker">Recent Notes</p>
-          <h2>最新随记</h2>
-        </div>
-
-        <div class="post-grid">
-          <article class="post-card large">
-            <time datetime="2026-06-10">2026.06.10</time>
-            <h3>傍晚的窗边，适合把一天收起来</h3>
-            <p>
-              今天想把这个博客当成一个小抽屉，放进照片、路上听见的话、饭桌上的味道，还有那些不急着解释的心情。
-            </p>
-            <a href="#">继续阅读</a>
-          </article>
-
-          <article class="post-card">
-            <time datetime="2026-06-02">2026.06.02</time>
-            <h3>最近喜欢的三件小事</h3>
-            <p>一杯热茶、一本翻到一半的书，以及傍晚楼下慢慢亮起来的灯。</p>
-            <a href="#">继续阅读</a>
-          </article>
-
-          <article class="post-card">
-            <time datetime="2026-05-21">2026.05.21</time>
-            <h3>在城市里散步</h3>
-            <p>没有目的地的时候，路边的树、旧招牌和风都变得比较容易被看见。</p>
-            <a href="#">继续阅读</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section album-section" id="albums">
-        <div class="section-heading">
-          <p class="section-kicker">Albums</p>
-          <h2>生活相册</h2>
-        </div>
-
-        <div class="photo-grid" aria-label="照片分类">
-          <article>
-            <span>01</span>
-            <h3>窗边</h3>
-            <p>阳光、植物、桌面和一些安静的下午。</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>路上</h3>
-            <p>散步时拍下来的街道、树影、天气和偶遇。</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>餐桌</h3>
-            <p>家常饭、咖啡店、朋友聚餐和新尝试的菜。</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>远方</h3>
-            <p>旅行中的车票、海风、山路和睡前整理的照片。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section split" id="lists">
-        <div>
-          <p class="section-kicker">Little Lists</p>
-          <h2>近期清单</h2>
-        </div>
-        <div class="list-panel">
-          <div class="list-item">
-            <span>在读</span>
-            <p>《把自己作为方法》、几篇关于城市生活的散文。</p>
-          </div>
-          <div class="list-item">
-            <span>在听</span>
-            <p>适合夜晚写东西的轻音乐，以及几期关于旅行的播客。</p>
-          </div>
-          <div class="list-item">
-            <span>想做</span>
-            <p>整理一组旧照片，写一篇关于“普通日子”的长一点的文章。</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="about-section" id="about">
-        <div>
-          <p class="section-kicker">About</p>
-          <h2>关于这个博客</h2>
+      <section class="compose-section" id="compose">
+        <div class="compose-copy">
+          <p class="section-kicker">Write</p>
+          <h2>记录入口</h2>
           <p>
-            这里暂时叫「日常小记」。它不是一个追求更新频率的地方，更像一个慢慢积累的生活档案。以后可以换成你的真实名字、照片、城市和介绍。
+            在这里写下内容，提交后会直接出现在对应板块。当前版本保存在本机浏览器里，适合先把结构和使用方式跑起来。
           </p>
         </div>
-        <a class="button primary" href="mailto:hello@example.com">写信给我</a>
+
+        <form class="entry-form" id="entry-form">
+          <div class="field-row">
+            <label>
+              <span>板块</span>
+              <select id="entry-type" name="type">
+                <option value="thought">近期思考</option>
+                <option value="life">生活记录</option>
+                <option value="reading">阅读摘抄</option>
+              </select>
+            </label>
+            <label>
+              <span>日期</span>
+              <input id="entry-date" name="date" type="date" required />
+            </label>
+          </div>
+
+          <label>
+            <span>标题</span>
+            <input id="entry-title" name="title" type="text" placeholder="给这条记录起个标题" required />
+          </label>
+
+          <div class="field-row reading-fields" data-reading-fields hidden>
+            <label>
+              <span>书名</span>
+              <input id="entry-book" name="book" type="text" placeholder="例如：《慢慢来，一切都来得及》" />
+            </label>
+            <label>
+              <span>作者</span>
+              <input id="entry-author" name="author" type="text" placeholder="作者名" />
+            </label>
+          </div>
+
+          <label>
+            <span>内容</span>
+            <textarea
+              id="entry-content"
+              name="content"
+              rows="7"
+              placeholder="写下你的想法、生活片段，或想摘抄的句子。"
+              required
+            ></textarea>
+          </label>
+
+          <label class="image-field" data-image-field hidden>
+            <span>生活图片</span>
+            <input id="entry-image" name="image" type="file" accept="image/*" />
+            <small>图片会保存在当前浏览器里，建议上传压缩后的生活照片。</small>
+          </label>
+
+          <div class="form-actions">
+            <button class="button primary" type="submit">保存并显示</button>
+            <button class="button ghost" type="button" id="clear-form">清空输入</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="section board-section" id="thoughts">
+        <div class="section-heading">
+          <p class="section-kicker">Thoughts</p>
+          <h2>近期思考</h2>
+          <p>按日期记录个人思考、笔记、灵感和阶段性的自我观察。</p>
+        </div>
+        <div class="entry-list thought-list" data-list="thought"></div>
+      </section>
+
+      <section class="section board-section life-section" id="life">
+        <div class="section-heading">
+          <p class="section-kicker">Life</p>
+          <h2>生活记录</h2>
+          <p>用时间和图片保存日常片段：散步、吃饭、天气、路上遇见的风景。</p>
+        </div>
+        <div class="entry-list life-list" data-list="life"></div>
+      </section>
+
+      <section class="section board-section" id="reading">
+        <div class="section-heading">
+          <p class="section-kicker">Reading</p>
+          <h2>阅读摘抄</h2>
+          <p>摘下书里的句子，也写一点当时为什么被它打动。</p>
+        </div>
+        <div class="entry-list reading-list" data-list="reading"></div>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>© 2026 日常小记</span>
-      <a href="#home">回到顶部</a>
+      <div>
+        <button type="button" id="export-data">导出记录</button>
+        <button type="button" id="reset-data">清空记录</button>
+      </div>
     </footer>
 
+    <template id="empty-template">
+      <article class="empty-state">
+        <h3>还没有记录</h3>
+        <p>从上方「记录入口」写一条，内容会立刻出现在这里。</p>
+      </article>
+    </template>
+
     <script>
+const STORAGE_KEY = "life-blog-entries-v1";
 const header = document.querySelector("[data-header]");
 const menuButton = document.querySelector(".menu-button");
 const nav = document.querySelector(".site-nav");
@@ -691,6 +710,53 @@ const navLinks = [...document.querySelectorAll(".site-nav a")];
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
+
+const form = document.querySelector("#entry-form");
+const typeInput = document.querySelector("#entry-type");
+const dateInput = document.querySelector("#entry-date");
+const titleInput = document.querySelector("#entry-title");
+const contentInput = document.querySelector("#entry-content");
+const bookInput = document.querySelector("#entry-book");
+const authorInput = document.querySelector("#entry-author");
+const imageInput = document.querySelector("#entry-image");
+const imageField = document.querySelector("[data-image-field]");
+const readingFields = document.querySelector("[data-reading-fields]");
+const clearFormButton = document.querySelector("#clear-form");
+const exportButton = document.querySelector("#export-data");
+const resetButton = document.querySelector("#reset-data");
+const emptyTemplate = document.querySelector("#empty-template");
+
+const sampleEntries = [
+  {
+    id: "sample-thought",
+    type: "thought",
+    date: "2026-06-10",
+    title: "关于开始记录这件事",
+    content:
+      "想先把生活里反复出现的念头留住。它们可能不成熟，但日期会帮我记得，当时的自己正在想什么。",
+    createdAt: "2026-06-10T12:00:00.000Z",
+  },
+  {
+    id: "sample-life",
+    type: "life",
+    date: "2026-06-09",
+    title: "窗边的傍晚",
+    content: "今天的光很好。适合泡茶，也适合把桌面收拾干净。",
+    createdAt: "2026-06-09T12:00:00.000Z",
+  },
+  {
+    id: "sample-reading",
+    type: "reading",
+    date: "2026-06-08",
+    title: "一句摘抄",
+    book: "未命名的书",
+    author: "作者",
+    content: "先把打动自己的句子摘下来，之后再慢慢理解它为什么打动我。",
+    createdAt: "2026-06-08T12:00:00.000Z",
+  },
+];
+
+let entries = loadEntries();
 
 function setHeaderState() {
   header.classList.toggle("is-scrolled", window.scrollY > 24);
@@ -700,6 +766,124 @@ function closeMenu() {
   menuButton.setAttribute("aria-expanded", "false");
   nav.classList.remove("is-open");
   header.classList.remove("is-open");
+}
+
+function loadEntries() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (!saved) return sampleEntries;
+
+  try {
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed : sampleEntries;
+  } catch {
+    return sampleEntries;
+  }
+}
+
+function saveEntries() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function formatDate(value) {
+  if (!value) return "";
+  const [year, month, day] = value.split("-");
+  return `${year}.${month}.${day}`;
+}
+
+function updateConditionalFields() {
+  const type = typeInput.value;
+  imageField.hidden = type !== "life";
+  readingFields.hidden = type !== "reading";
+}
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve("");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      resolve("");
+      return;
+    }
+
+    const image = new Image();
+    const reader = new FileReader();
+    reader.onload = () => {
+      image.onload = () => {
+        const maxSide = 1600;
+        const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(image.width * scale);
+        canvas.height = Math.round(image.height * scale);
+
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.82));
+      };
+      image.onerror = reject;
+      image.src = String(reader.result || "");
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderEntry(entry) {
+  const image = entry.image
+    ? `<img src="${entry.image}" alt="${escapeHtml(entry.title)} 的生活记录图片" />`
+    : "";
+  const bookMeta =
+    entry.type === "reading" && (entry.book || entry.author)
+      ? `<div class="book-meta">${escapeHtml(entry.book || "未填写书名")}${entry.author ? ` / ${escapeHtml(entry.author)}` : ""}</div>`
+      : "";
+
+  return `
+    <article class="entry-card">
+      ${image}
+      <header>
+        <time datetime="${escapeHtml(entry.date)}">${formatDate(entry.date)}</time>
+        <h3>${escapeHtml(entry.title)}</h3>
+        ${bookMeta}
+      </header>
+      <p>${escapeHtml(entry.content)}</p>
+      <footer>
+        <button class="delete-entry" type="button" data-delete="${entry.id}">删除</button>
+      </footer>
+    </article>
+  `;
+}
+
+function renderLists() {
+  document.querySelectorAll("[data-list]").forEach((list) => {
+    const type = list.dataset.list;
+    const filtered = entries
+      .filter((entry) => entry.type === type)
+      .sort((a, b) => `${b.date || ""}${b.createdAt || ""}`.localeCompare(`${a.date || ""}${a.createdAt || ""}`));
+
+    if (filtered.length === 0) {
+      list.innerHTML = emptyTemplate.innerHTML;
+      return;
+    }
+
+    list.innerHTML = filtered.map(renderEntry).join("");
+  });
+}
+
+function resetForm() {
+  form.reset();
+  dateInput.value = new Date().toISOString().slice(0, 10);
+  updateConditionalFields();
 }
 
 menuButton.addEventListener("click", () => {
@@ -713,9 +897,67 @@ navLinks.forEach((link) => {
   link.addEventListener("click", closeMenu);
 });
 
+typeInput.addEventListener("change", updateConditionalFields);
+clearFormButton.addEventListener("click", resetForm);
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const image = typeInput.value === "life" ? await fileToDataUrl(imageInput.files[0]) : "";
+  const entry = {
+    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    type: typeInput.value,
+    date: dateInput.value,
+    title: titleInput.value.trim(),
+    content: contentInput.value.trim(),
+    book: bookInput.value.trim(),
+    author: authorInput.value.trim(),
+    image,
+    createdAt: new Date().toISOString(),
+  };
+
+  entries = [entry, ...entries];
+  saveEntries();
+  renderLists();
+  resetForm();
+
+  document.querySelector(`#${entry.type === "thought" ? "thoughts" : entry.type}`).scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+});
+
+document.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest("[data-delete]");
+  if (!deleteButton) return;
+
+  entries = entries.filter((entry) => entry.id !== deleteButton.dataset.delete);
+  saveEntries();
+  renderLists();
+});
+
+exportButton.addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(entries, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `life-blog-entries-${new Date().toISOString().slice(0, 10)}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+resetButton.addEventListener("click", () => {
+  const confirmed = window.confirm("确定要清空当前浏览器里的所有记录吗？这个操作不能撤销。");
+  if (!confirmed) return;
+
+  entries = [];
+  saveEntries();
+  renderLists();
+});
+
 const observer = new IntersectionObserver(
-  (entries) => {
-    const visible = entries
+  (entryChanges) => {
+    const visible = entryChanges
       .filter((entry) => entry.isIntersecting)
       .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
@@ -730,6 +972,9 @@ const observer = new IntersectionObserver(
 
 sections.forEach((section) => observer.observe(section));
 window.addEventListener("scroll", setHeaderState, { passive: true });
+dateInput.value = new Date().toISOString().slice(0, 10);
+updateConditionalFields();
+renderLists();
 setHeaderState();
 
 </script>
