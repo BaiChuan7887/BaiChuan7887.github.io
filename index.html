@@ -6,7 +6,7 @@
     <title>日常小记 | 生活记录博客</title>
     <meta
       name="description"
-      content="一个可以直接记录近期思考、生活照片和阅读摘抄的个人生活博客。"
+      content="一个带公开浏览、留言和管理员后台入口的个人生活博客。"
     />
     <style>
 :root {
@@ -101,7 +101,7 @@ button {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: clamp(18px, 3vw, 34px);
+  gap: clamp(16px, 2.6vw, 30px);
   font-size: 0.95rem;
   font-weight: 720;
 }
@@ -216,7 +216,7 @@ h2 {
 
 h3 {
   margin-bottom: 12px;
-  font-size: clamp(1.18rem, 2vw, 1.58rem);
+  font-size: clamp(1.16rem, 2vw, 1.55rem);
   line-height: 1.18;
 }
 
@@ -229,7 +229,9 @@ h3 {
 }
 
 .hero-actions,
-.form-actions {
+.form-actions,
+.admin-toolbar,
+.site-footer div {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -270,47 +272,166 @@ h3 {
   border-color: var(--line);
 }
 
-.compose-section,
-.section {
-  padding: clamp(72px, 10vw, 126px) clamp(20px, 6vw, 82px);
-}
-
-.compose-section {
+.notice-band {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(340px, 1fr);
-  gap: clamp(34px, 6vw, 82px);
-  align-items: start;
-  background: #eef0e8;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
 }
 
-.compose-copy {
-  position: sticky;
-  top: 104px;
+.notice-band div {
+  min-height: 118px;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 24px clamp(18px, 4vw, 48px);
+  background: var(--paper);
 }
 
-.compose-copy p,
+.notice-band strong {
+  color: var(--moss);
+  font-size: clamp(1.3rem, 2.4vw, 2.1rem);
+}
+
+.notice-band span,
 .section-heading p,
 .entry-card p,
 .empty-state p,
+.comment-card p,
+.admin-copy p,
+.form-hint,
 .image-field small {
   color: var(--muted);
   line-height: 1.78;
 }
 
-.entry-form {
-  display: grid;
-  gap: 18px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: clamp(20px, 4vw, 34px);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+.section,
+.admin-section {
+  padding: clamp(72px, 10vw, 126px) clamp(20px, 6vw, 82px);
 }
 
-.field-row {
+.section-heading {
+  max-width: 780px;
+  margin-bottom: clamp(30px, 5vw, 52px);
+}
+
+.board-section {
+  min-height: 520px;
+}
+
+.life-section,
+.messages-section {
+  background: #f3efe5;
+}
+
+.entry-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.entry-card,
+.empty-state,
+.message-form,
+.comment-card,
+.admin-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px rgba(32, 35, 31, 0.06);
+}
+
+.entry-card,
+.empty-state,
+.comment-card {
+  padding: clamp(20px, 3vw, 28px);
+}
+
+.entry-card {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.entry-card header {
+  display: grid;
+  gap: 8px;
+}
+
+.entry-card time,
+.entry-card .book-meta,
+.comment-card strong {
+  color: var(--rose);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.entry-card p,
+.comment-card p {
+  margin-bottom: 0;
+  white-space: pre-wrap;
+}
+
+.entry-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.comments {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.comments h4 {
+  margin: 0;
+  color: var(--moss);
+}
+
+.inline-comment-form {
+  display: grid;
+  gap: 10px;
+}
+
+.inline-comment-form button,
+.message-form button,
+.admin-row button,
+.site-footer button {
+  width: fit-content;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 13px;
+  color: var(--ink);
+  background: transparent;
+  font-weight: 800;
+}
+
+.comment-list {
+  display: grid;
+  gap: 8px;
+}
+
+.comment-item {
+  border-left: 3px solid rgba(189, 111, 99, 0.5);
+  padding-left: 10px;
+}
+
+.comment-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.empty-state {
+  min-height: 180px;
+  display: grid;
+  align-content: center;
+  grid-column: 1 / -1;
+  background: rgba(255, 253, 248, 0.62);
 }
 
 label {
@@ -338,7 +459,7 @@ textarea {
 
 textarea {
   resize: vertical;
-  min-height: 152px;
+  min-height: 112px;
 }
 
 input:focus,
@@ -348,94 +469,79 @@ textarea:focus {
   box-shadow: 0 0 0 4px rgba(117, 132, 108, 0.16);
 }
 
-.image-field small {
-  font-size: 0.86rem;
+.message-form {
+  display: grid;
+  gap: 16px;
+  max-width: 760px;
+  padding: clamp(20px, 4vw, 34px);
 }
 
-.section-heading {
-  max-width: 780px;
-  margin-bottom: clamp(30px, 5vw, 52px);
-}
-
-.board-section {
-  min-height: 520px;
-}
-
-.life-section {
-  background: #f3efe5;
-}
-
-.entry-list {
+.message-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.admin-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr) minmax(360px, 1fr);
+  gap: clamp(34px, 6vw, 82px);
+  align-items: start;
+  background: #eef0e8;
+}
+
+.admin-copy {
+  position: sticky;
+  top: 104px;
+}
+
+.admin-panel {
+  padding: clamp(20px, 4vw, 34px);
+}
+
+.login-form,
+.entry-form,
+.admin-workspace {
+  display: grid;
   gap: 18px;
 }
 
-.entry-card,
-.empty-state {
+.admin-toolbar {
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.admin-list {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.admin-entries {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: clamp(20px, 3vw, 28px);
-  background: var(--surface);
-  box-shadow: 0 12px 34px rgba(32, 35, 31, 0.06);
+  padding: 14px;
 }
 
-.entry-card {
-  display: grid;
-  gap: 16px;
-  align-content: start;
-}
-
-.entry-card header {
-  display: grid;
-  gap: 8px;
-}
-
-.entry-card time,
-.entry-card .book-meta {
-  color: var(--rose);
-  font-size: 0.86rem;
-  font-weight: 850;
-}
-
-.entry-card p {
-  margin-bottom: 0;
-  white-space: pre-wrap;
-}
-
-.entry-card img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.entry-card footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.delete-entry {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 8px 12px;
+.admin-row small {
   color: var(--muted);
-  background: transparent;
-  font-size: 0.88rem;
-  font-weight: 800;
-}
-
-.delete-entry:hover {
-  color: var(--rose);
-  border-color: rgba(189, 111, 99, 0.42);
-}
-
-.empty-state {
-  min-height: 180px;
-  display: grid;
-  align-content: center;
-  grid-column: 1 / -1;
-  background: rgba(255, 253, 248, 0.62);
 }
 
 .site-footer {
@@ -448,19 +554,9 @@ textarea:focus {
   background: #1f281f;
 }
 
-.site-footer div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
 .site-footer button {
-  border: 1px solid rgba(255, 253, 248, 0.2);
-  border-radius: 999px;
-  padding: 8px 12px;
   color: #fffdf8;
-  background: transparent;
-  font-weight: 780;
+  border-color: rgba(255, 253, 248, 0.2);
 }
 
 @media (max-width: 980px) {
@@ -511,12 +607,14 @@ textarea:focus {
       linear-gradient(0deg, rgba(45, 54, 39, 0.34), rgba(45, 54, 39, 0.1));
   }
 
-  .compose-section,
-  .entry-list {
+  .notice-band,
+  .entry-list,
+  .message-list,
+  .admin-section {
     grid-template-columns: 1fr;
   }
 
-  .compose-copy {
+  .admin-copy {
     position: static;
   }
 }
@@ -542,10 +640,14 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
-  .compose-section,
-  .section {
+  .section,
+  .admin-section {
     padding-right: 18px;
     padding-left: 18px;
+  }
+
+  .admin-row {
+    grid-template-columns: 1fr;
   }
 
   .site-footer {
@@ -570,10 +672,11 @@ textarea:focus {
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="主导航">
-        <a href="#compose">写入</a>
         <a href="#thoughts">近期思考</a>
         <a href="#life">生活记录</a>
         <a href="#reading">阅读</a>
+        <a href="#messages">留言</a>
+        <a href="#admin">管理入口</a>
       </nav>
     </header>
 
@@ -584,78 +687,28 @@ textarea:focus {
           <p class="eyebrow">Life Journal</p>
           <h1>把日子慢慢写下来。</h1>
           <p class="hero-copy">
-            一个给自己用的小博客：写下近期思考，保存生活照片，摘抄读书时遇见的句子。
+            公众可以阅读和留言；管理员进入后台后，可以发布、编辑和删除内容。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#compose">开始记录</a>
-            <a class="button secondary" href="#thoughts">查看内容</a>
+            <a class="button primary" href="#thoughts">开始阅读</a>
+            <a class="button secondary" href="#admin">进入后台</a>
           </div>
         </div>
       </section>
 
-      <section class="compose-section" id="compose">
-        <div class="compose-copy">
-          <p class="section-kicker">Write</p>
-          <h2>记录入口</h2>
-          <p>
-            在这里写下内容，提交后会直接出现在对应板块。当前版本保存在本机浏览器里，适合先把结构和使用方式跑起来。
-          </p>
+      <section class="notice-band">
+        <div>
+          <strong>公开权限</strong>
+          <span>浏览文章、提交留言</span>
         </div>
-
-        <form class="entry-form" id="entry-form">
-          <div class="field-row">
-            <label>
-              <span>板块</span>
-              <select id="entry-type" name="type">
-                <option value="thought">近期思考</option>
-                <option value="life">生活记录</option>
-                <option value="reading">阅读摘抄</option>
-              </select>
-            </label>
-            <label>
-              <span>日期</span>
-              <input id="entry-date" name="date" type="date" required />
-            </label>
-          </div>
-
-          <label>
-            <span>标题</span>
-            <input id="entry-title" name="title" type="text" placeholder="给这条记录起个标题" required />
-          </label>
-
-          <div class="field-row reading-fields" data-reading-fields hidden>
-            <label>
-              <span>书名</span>
-              <input id="entry-book" name="book" type="text" placeholder="例如：《慢慢来，一切都来得及》" />
-            </label>
-            <label>
-              <span>作者</span>
-              <input id="entry-author" name="author" type="text" placeholder="作者名" />
-            </label>
-          </div>
-
-          <label>
-            <span>内容</span>
-            <textarea
-              id="entry-content"
-              name="content"
-              rows="7"
-              placeholder="写下你的想法、生活片段，或想摘抄的句子。"
-              required
-            ></textarea>
-          </label>
-
-          <label class="image-field" data-image-field hidden>
-            <span>生活图片</span>
-            <input id="entry-image" name="image" type="file" accept="image/*" />
-            <small>图片会保存在当前浏览器里，建议上传压缩后的生活照片。</small>
-          </label>
-
-          <div class="form-actions">
-            <button class="button primary" type="submit">保存并显示</button>
-            <button class="button ghost" type="button" id="clear-form">清空输入</button>
-          </div>
-        </form>
+        <div>
+          <strong>管理权限</strong>
+          <span>发布、编辑、删除文章</span>
+        </div>
+        <div>
+          <strong>三个板块</strong>
+          <span>思考、生活、阅读</span>
+        </div>
       </section>
 
       <section class="section board-section" id="thoughts">
@@ -664,7 +717,7 @@ textarea:focus {
           <h2>近期思考</h2>
           <p>按日期记录个人思考、笔记、灵感和阶段性的自我观察。</p>
         </div>
-        <div class="entry-list thought-list" data-list="thought"></div>
+        <div class="entry-list" data-list="thought"></div>
       </section>
 
       <section class="section board-section life-section" id="life">
@@ -673,7 +726,7 @@ textarea:focus {
           <h2>生活记录</h2>
           <p>用时间和图片保存日常片段：散步、吃饭、天气、路上遇见的风景。</p>
         </div>
-        <div class="entry-list life-list" data-list="life"></div>
+        <div class="entry-list" data-list="life"></div>
       </section>
 
       <section class="section board-section" id="reading">
@@ -682,27 +735,142 @@ textarea:focus {
           <h2>阅读摘抄</h2>
           <p>摘下书里的句子，也写一点当时为什么被它打动。</p>
         </div>
-        <div class="entry-list reading-list" data-list="reading"></div>
+        <div class="entry-list" data-list="reading"></div>
+      </section>
+
+      <section class="section messages-section" id="messages">
+        <div class="section-heading">
+          <p class="section-kicker">Messages</p>
+          <h2>访客留言</h2>
+          <p>公众可以在文章下留言，也可以在这里留下给博客主人的一句话。</p>
+        </div>
+
+        <form class="message-form" id="global-message-form">
+          <label>
+            <span>昵称</span>
+            <input id="global-message-name" type="text" placeholder="怎么称呼你" required />
+          </label>
+          <label>
+            <span>留言</span>
+            <textarea id="global-message-content" rows="4" placeholder="写下想说的话" required></textarea>
+          </label>
+          <button class="button primary" type="submit">提交留言</button>
+        </form>
+
+        <div class="message-list" id="global-message-list"></div>
+      </section>
+
+      <section class="admin-section" id="admin">
+        <div class="admin-copy">
+          <p class="section-kicker">Admin</p>
+          <h2>管理后台</h2>
+          <p>
+            管理员登录后可以发布、编辑和删除三个板块的内容。当前静态版本用于先跑通界面和流程，正式权限需要接入后端服务。
+          </p>
+        </div>
+
+        <div class="admin-panel">
+          <form class="login-form" id="login-form">
+            <label>
+              <span>管理员口令</span>
+              <input id="admin-passcode" type="password" placeholder="输入管理员口令" autocomplete="current-password" />
+            </label>
+            <button class="button primary" type="submit">登录后台</button>
+            <p class="form-hint">演示口令写在代码里，正式上线前需要换成后端认证。</p>
+          </form>
+
+          <div class="admin-workspace" id="admin-workspace" hidden>
+            <div class="admin-toolbar">
+              <strong>已进入管理模式</strong>
+              <button class="button ghost" type="button" id="admin-logout">退出</button>
+            </div>
+
+            <form class="entry-form" id="entry-form">
+              <input id="entry-id" type="hidden" />
+              <div class="field-row">
+                <label>
+                  <span>板块</span>
+                  <select id="entry-type" name="type">
+                    <option value="thought">近期思考</option>
+                    <option value="life">生活记录</option>
+                    <option value="reading">阅读摘抄</option>
+                  </select>
+                </label>
+                <label>
+                  <span>日期</span>
+                  <input id="entry-date" name="date" type="date" required />
+                </label>
+              </div>
+
+              <label>
+                <span>标题</span>
+                <input id="entry-title" name="title" type="text" placeholder="文章标题" required />
+              </label>
+
+              <div class="field-row reading-fields" data-reading-fields hidden>
+                <label>
+                  <span>书名</span>
+                  <input id="entry-book" name="book" type="text" placeholder="例如：《置身事内》" />
+                </label>
+                <label>
+                  <span>作者</span>
+                  <input id="entry-author" name="author" type="text" placeholder="作者名" />
+                </label>
+              </div>
+
+              <label>
+                <span>内容</span>
+                <textarea
+                  id="entry-content"
+                  name="content"
+                  rows="7"
+                  placeholder="写下要发布到前端的内容"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="image-field" data-image-field hidden>
+                <span>生活图片</span>
+                <input id="entry-image" name="image" type="file" accept="image/*" />
+                <small>上传新图片会替换当前文章图片；留空则保留原图。</small>
+              </label>
+
+              <div class="form-actions">
+                <button class="button primary" type="submit">发布 / 保存</button>
+                <button class="button ghost" type="button" id="clear-form">清空表单</button>
+              </div>
+            </form>
+
+            <div class="admin-list">
+              <h3>已发布内容</h3>
+              <div id="admin-entry-list"></div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>© 2026 日常小记</span>
       <div>
-        <button type="button" id="export-data">导出记录</button>
-        <button type="button" id="reset-data">清空记录</button>
+        <button type="button" id="export-data">导出数据</button>
+        <button type="button" id="reset-data">清空本机数据</button>
       </div>
     </footer>
 
     <template id="empty-template">
       <article class="empty-state">
-        <h3>还没有记录</h3>
-        <p>从上方「记录入口」写一条，内容会立刻出现在这里。</p>
+        <h3>还没有内容</h3>
+        <p>管理员发布后，内容会显示在这里。</p>
       </article>
     </template>
 
     <script>
-const STORAGE_KEY = "life-blog-entries-v1";
+const ENTRY_KEY = "life-blog-posts-v2";
+const MESSAGE_KEY = "life-blog-global-messages-v1";
+const ADMIN_SESSION_KEY = "life-blog-admin-session-v1";
+const ADMIN_PASSCODE = "admin-2026";
+
 const header = document.querySelector("[data-header]");
 const menuButton = document.querySelector(".menu-button");
 const nav = document.querySelector(".site-nav");
@@ -711,7 +879,12 @@ const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
 
+const loginForm = document.querySelector("#login-form");
+const adminWorkspace = document.querySelector("#admin-workspace");
+const adminPasscode = document.querySelector("#admin-passcode");
+const adminLogout = document.querySelector("#admin-logout");
 const form = document.querySelector("#entry-form");
+const entryIdInput = document.querySelector("#entry-id");
 const typeInput = document.querySelector("#entry-type");
 const dateInput = document.querySelector("#entry-date");
 const titleInput = document.querySelector("#entry-title");
@@ -722,11 +895,16 @@ const imageInput = document.querySelector("#entry-image");
 const imageField = document.querySelector("[data-image-field]");
 const readingFields = document.querySelector("[data-reading-fields]");
 const clearFormButton = document.querySelector("#clear-form");
+const adminEntryList = document.querySelector("#admin-entry-list");
+const globalMessageForm = document.querySelector("#global-message-form");
+const globalMessageName = document.querySelector("#global-message-name");
+const globalMessageContent = document.querySelector("#global-message-content");
+const globalMessageList = document.querySelector("#global-message-list");
 const exportButton = document.querySelector("#export-data");
 const resetButton = document.querySelector("#reset-data");
 const emptyTemplate = document.querySelector("#empty-template");
 
-const sampleEntries = [
+const samplePosts = [
   {
     id: "sample-thought",
     type: "thought",
@@ -734,6 +912,7 @@ const sampleEntries = [
     title: "关于开始记录这件事",
     content:
       "想先把生活里反复出现的念头留住。它们可能不成熟，但日期会帮我记得，当时的自己正在想什么。",
+    comments: [],
     createdAt: "2026-06-10T12:00:00.000Z",
   },
   {
@@ -742,6 +921,7 @@ const sampleEntries = [
     date: "2026-06-09",
     title: "窗边的傍晚",
     content: "今天的光很好。适合泡茶，也适合把桌面收拾干净。",
+    comments: [],
     createdAt: "2026-06-09T12:00:00.000Z",
   },
   {
@@ -752,11 +932,13 @@ const sampleEntries = [
     book: "未命名的书",
     author: "作者",
     content: "先把打动自己的句子摘下来，之后再慢慢理解它为什么打动我。",
+    comments: [],
     createdAt: "2026-06-08T12:00:00.000Z",
   },
 ];
 
-let entries = loadEntries();
+let posts = loadJson(ENTRY_KEY, samplePosts);
+let globalMessages = loadJson(MESSAGE_KEY, []);
 
 function setHeaderState() {
   header.classList.toggle("is-scrolled", window.scrollY > 24);
@@ -768,20 +950,24 @@ function closeMenu() {
   header.classList.remove("is-open");
 }
 
-function loadEntries() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) return sampleEntries;
+function loadJson(key, fallback) {
+  const saved = localStorage.getItem(key);
+  if (!saved) return fallback;
 
   try {
     const parsed = JSON.parse(saved);
-    return Array.isArray(parsed) ? parsed : sampleEntries;
+    return Array.isArray(parsed) ? parsed : fallback;
   } catch {
-    return sampleEntries;
+    return fallback;
   }
 }
 
-function saveEntries() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+function savePosts() {
+  localStorage.setItem(ENTRY_KEY, JSON.stringify(posts));
+}
+
+function saveMessages() {
+  localStorage.setItem(MESSAGE_KEY, JSON.stringify(globalMessages));
 }
 
 function escapeHtml(value) {
@@ -799,6 +985,21 @@ function formatDate(value) {
   return `${year}.${month}.${day}`;
 }
 
+function makeId() {
+  return crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+}
+
+function isAdmin() {
+  return sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
+}
+
+function setAdminState(active) {
+  sessionStorage.setItem(ADMIN_SESSION_KEY, active ? "true" : "false");
+  loginForm.hidden = active;
+  adminWorkspace.hidden = !active;
+  renderAdminList();
+}
+
 function updateConditionalFields() {
   const type = typeInput.value;
   imageField.hidden = type !== "life";
@@ -807,12 +1008,7 @@ function updateConditionalFields() {
 
 function fileToDataUrl(file) {
   return new Promise((resolve, reject) => {
-    if (!file) {
-      resolve("");
-      return;
-    }
-
-    if (!file.type.startsWith("image/")) {
+    if (!file || !file.type.startsWith("image/")) {
       resolve("");
       return;
     }
@@ -839,27 +1035,55 @@ function fileToDataUrl(file) {
   });
 }
 
-function renderEntry(entry) {
-  const image = entry.image
-    ? `<img src="${entry.image}" alt="${escapeHtml(entry.title)} 的生活记录图片" />`
+function renderComments(post) {
+  const comments = post.comments || [];
+  const list =
+    comments.length > 0
+      ? comments
+          .map(
+            (comment) => `
+              <div class="comment-item">
+                <strong>${escapeHtml(comment.name)}</strong>
+                <p>${escapeHtml(comment.content)}</p>
+                <span>${formatDate(comment.date)}</span>
+              </div>
+            `,
+          )
+          .join("")
+      : "<p>还没有留言。</p>";
+
+  return `
+    <section class="comments">
+      <h4>留言</h4>
+      <div class="comment-list">${list}</div>
+      <form class="inline-comment-form" data-comment-form="${post.id}">
+        <input name="name" type="text" placeholder="昵称" required />
+        <textarea name="content" rows="3" placeholder="写下你的留言" required></textarea>
+        <button type="submit">提交留言</button>
+      </form>
+    </section>
+  `;
+}
+
+function renderPost(post) {
+  const image = post.image
+    ? `<img src="${post.image}" alt="${escapeHtml(post.title)} 的生活记录图片" />`
     : "";
   const bookMeta =
-    entry.type === "reading" && (entry.book || entry.author)
-      ? `<div class="book-meta">${escapeHtml(entry.book || "未填写书名")}${entry.author ? ` / ${escapeHtml(entry.author)}` : ""}</div>`
+    post.type === "reading" && (post.book || post.author)
+      ? `<div class="book-meta">${escapeHtml(post.book || "未填写书名")}${post.author ? ` / ${escapeHtml(post.author)}` : ""}</div>`
       : "";
 
   return `
     <article class="entry-card">
       ${image}
       <header>
-        <time datetime="${escapeHtml(entry.date)}">${formatDate(entry.date)}</time>
-        <h3>${escapeHtml(entry.title)}</h3>
+        <time datetime="${escapeHtml(post.date)}">${formatDate(post.date)}</time>
+        <h3>${escapeHtml(post.title)}</h3>
         ${bookMeta}
       </header>
-      <p>${escapeHtml(entry.content)}</p>
-      <footer>
-        <button class="delete-entry" type="button" data-delete="${entry.id}">删除</button>
-      </footer>
+      <p>${escapeHtml(post.content)}</p>
+      ${renderComments(post)}
     </article>
   `;
 }
@@ -867,8 +1091,8 @@ function renderEntry(entry) {
 function renderLists() {
   document.querySelectorAll("[data-list]").forEach((list) => {
     const type = list.dataset.list;
-    const filtered = entries
-      .filter((entry) => entry.type === type)
+    const filtered = posts
+      .filter((post) => post.type === type)
       .sort((a, b) => `${b.date || ""}${b.createdAt || ""}`.localeCompare(`${a.date || ""}${a.createdAt || ""}`));
 
     if (filtered.length === 0) {
@@ -876,14 +1100,82 @@ function renderLists() {
       return;
     }
 
-    list.innerHTML = filtered.map(renderEntry).join("");
+    list.innerHTML = filtered.map(renderPost).join("");
   });
+}
+
+function renderAdminList() {
+  if (!isAdmin()) return;
+
+  const rows = posts
+    .slice()
+    .sort((a, b) => `${b.date || ""}${b.createdAt || ""}`.localeCompare(`${a.date || ""}${a.createdAt || ""}`))
+    .map(
+      (post) => `
+        <div class="admin-row">
+          <div>
+            <strong>${escapeHtml(post.title)}</strong>
+            <small>${formatDate(post.date)} / ${labelForType(post.type)}</small>
+          </div>
+          <div>
+            <button type="button" data-edit="${post.id}">编辑</button>
+            <button type="button" data-delete-post="${post.id}">删除</button>
+          </div>
+        </div>
+      `,
+    )
+    .join("");
+
+  adminEntryList.innerHTML = `<div class="admin-entries">${rows || "<p>暂无已发布内容。</p>"}</div>`;
+}
+
+function labelForType(type) {
+  return {
+    thought: "近期思考",
+    life: "生活记录",
+    reading: "阅读摘抄",
+  }[type];
+}
+
+function renderGlobalMessages() {
+  if (globalMessages.length === 0) {
+    globalMessageList.innerHTML = '<article class="empty-state"><h3>还没有留言</h3><p>访客提交后会显示在这里。</p></article>';
+    return;
+  }
+
+  globalMessageList.innerHTML = globalMessages
+    .slice()
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    .map(
+      (message) => `
+        <article class="comment-card">
+          <strong>${escapeHtml(message.name)}</strong>
+          <p>${escapeHtml(message.content)}</p>
+          <small>${formatDate(message.date)}</small>
+        </article>
+      `,
+    )
+    .join("");
 }
 
 function resetForm() {
   form.reset();
+  entryIdInput.value = "";
   dateInput.value = new Date().toISOString().slice(0, 10);
   updateConditionalFields();
+}
+
+function populateForm(post) {
+  entryIdInput.value = post.id;
+  typeInput.value = post.type;
+  dateInput.value = post.date;
+  titleInput.value = post.title;
+  contentInput.value = post.content;
+  bookInput.value = post.book || "";
+  authorInput.value = post.author || "";
+  imageInput.value = "";
+  updateConditionalFields();
+  document.querySelector("#admin").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 menuButton.addEventListener("click", () => {
@@ -897,62 +1189,139 @@ navLinks.forEach((link) => {
   link.addEventListener("click", closeMenu);
 });
 
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (adminPasscode.value !== ADMIN_PASSCODE) {
+    alert("管理员口令不正确。");
+    return;
+  }
+
+  adminPasscode.value = "";
+  setAdminState(true);
+});
+
+adminLogout.addEventListener("click", () => {
+  setAdminState(false);
+});
+
 typeInput.addEventListener("change", updateConditionalFields);
 clearFormButton.addEventListener("click", resetForm);
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (!isAdmin()) return;
 
-  const image = typeInput.value === "life" ? await fileToDataUrl(imageInput.files[0]) : "";
-  const entry = {
-    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+  const existing = posts.find((post) => post.id === entryIdInput.value);
+  const nextImage = typeInput.value === "life" ? await fileToDataUrl(imageInput.files[0]) : "";
+  const post = {
+    id: existing?.id || makeId(),
     type: typeInput.value,
     date: dateInput.value,
     title: titleInput.value.trim(),
     content: contentInput.value.trim(),
     book: bookInput.value.trim(),
     author: authorInput.value.trim(),
-    image,
-    createdAt: new Date().toISOString(),
+    image: nextImage || existing?.image || "",
+    comments: existing?.comments || [],
+    createdAt: existing?.createdAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
-  entries = [entry, ...entries];
-  saveEntries();
+  posts = existing ? posts.map((item) => (item.id === post.id ? post : item)) : [post, ...posts];
+  savePosts();
   renderLists();
+  renderAdminList();
   resetForm();
-
-  document.querySelector(`#${entry.type === "thought" ? "thoughts" : entry.type}`).scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
 });
 
-document.addEventListener("click", (event) => {
-  const deleteButton = event.target.closest("[data-delete]");
-  if (!deleteButton) return;
+document.addEventListener("submit", (event) => {
+  const commentForm = event.target.closest("[data-comment-form]");
+  if (!commentForm) return;
 
-  entries = entries.filter((entry) => entry.id !== deleteButton.dataset.delete);
-  saveEntries();
+  event.preventDefault();
+  const postId = commentForm.dataset.commentForm;
+  const formData = new FormData(commentForm);
+  posts = posts.map((post) => {
+    if (post.id !== postId) return post;
+    const comments = post.comments || [];
+    return {
+      ...post,
+      comments: [
+        ...comments,
+        {
+          id: makeId(),
+          name: String(formData.get("name")).trim(),
+          content: String(formData.get("content")).trim(),
+          date: new Date().toISOString().slice(0, 10),
+          createdAt: new Date().toISOString(),
+        },
+      ],
+    };
+  });
+
+  savePosts();
   renderLists();
+});
+
+globalMessageForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  globalMessages = [
+    {
+      id: makeId(),
+      name: globalMessageName.value.trim(),
+      content: globalMessageContent.value.trim(),
+      date: new Date().toISOString().slice(0, 10),
+      createdAt: new Date().toISOString(),
+    },
+    ...globalMessages,
+  ];
+  saveMessages();
+  globalMessageForm.reset();
+  renderGlobalMessages();
+});
+
+adminEntryList.addEventListener("click", (event) => {
+  const editButton = event.target.closest("[data-edit]");
+  const deleteButton = event.target.closest("[data-delete-post]");
+
+  if (editButton) {
+    const post = posts.find((item) => item.id === editButton.dataset.edit);
+    if (post) populateForm(post);
+  }
+
+  if (deleteButton) {
+    const confirmed = window.confirm("确定删除这篇内容吗？");
+    if (!confirmed) return;
+
+    posts = posts.filter((item) => item.id !== deleteButton.dataset.deletePost);
+    savePosts();
+    renderLists();
+    renderAdminList();
+  }
 });
 
 exportButton.addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(entries, null, 2)], { type: "application/json" });
+  const data = { posts, globalMessages };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `life-blog-entries-${new Date().toISOString().slice(0, 10)}.json`;
+  link.download = `life-blog-data-${new Date().toISOString().slice(0, 10)}.json`;
   link.click();
   URL.revokeObjectURL(url);
 });
 
 resetButton.addEventListener("click", () => {
-  const confirmed = window.confirm("确定要清空当前浏览器里的所有记录吗？这个操作不能撤销。");
+  const confirmed = window.confirm("确定清空当前浏览器里的文章和留言吗？这个操作不能撤销。");
   if (!confirmed) return;
 
-  entries = [];
-  saveEntries();
+  posts = [];
+  globalMessages = [];
+  savePosts();
+  saveMessages();
   renderLists();
+  renderGlobalMessages();
+  renderAdminList();
 });
 
 const observer = new IntersectionObserver(
@@ -974,7 +1343,9 @@ sections.forEach((section) => observer.observe(section));
 window.addEventListener("scroll", setHeaderState, { passive: true });
 dateInput.value = new Date().toISOString().slice(0, 10);
 updateConditionalFields();
+setAdminState(isAdmin());
 renderLists();
+renderGlobalMessages();
 setHeaderState();
 
 </script>
